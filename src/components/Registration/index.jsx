@@ -9,23 +9,29 @@ const Registration = () => {
     passwordConfirm: '',
   });
 
-  console.log(user);
-
-  const checkEmail = () => {
-    if (user.username === '' && user.email.includes('@')) {
-      const userName = user.email.slice(0, [user.email.indexOf('@')]);
+  const createNameFromEmail = (event) => {
+    const emailInput = event.target.value;
+    if (user.username === '' && emailInput.includes('@')) {
+      const userName = emailInput.slice(0, [emailInput.indexOf('@')]);
       setUser({ ...user, username: userName });
+    } else if (user.username !== '' && !emailInput.includes('@')) {
+      setUser({ ...user, username: '' });
     }
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(user);
+  };
+
   return (
-    <form className="form">
+    <form className="form" onSubmit={handleSubmit}>
       <input
         className="form__input"
         placeholder="Email Adress"
         onChange={(event) => {
           setUser({ ...user, email: event.target.value });
-          checkEmail();
+          createNameFromEmail(event);
         }}
         type="email"
       />

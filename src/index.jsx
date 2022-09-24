@@ -6,6 +6,7 @@ import './style.css';
 const App = () => {
   return (
     <div className="container">
+      <h1>Registration</h1>
       <Registration />
     </div>
   );
